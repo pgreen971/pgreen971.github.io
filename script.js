@@ -1,3 +1,3 @@
 function changeBkg(button) {
-    button.style.backgroundColor = 0xFF0000
+    console.log("Hi!")
 }
