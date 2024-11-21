@@ -5,6 +5,17 @@
 body {
     background-color: rgb(50, 50, 50);
 }
+.coinContainer {
+    width: 50%;
+    background-color: rgb(70, 70, 70);
+    float: left;
+}
+.clear {
+    clear: both;
+}
+.coinImg {
+    float: right;
+}
 titleCustom {
     align-items: center;
     font-size: 30px;
