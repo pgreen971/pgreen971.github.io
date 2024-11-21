@@ -1,3 +1,13 @@
+var tblEnq = []
+
+if (localStorage.getItem("enquired")) {
+    for (var i = 0; i <= localStorage.getItem("enquired").length; i++) {
+        localStorage.getItem("enquired")[i].textContent = "Enquired";
+        localStorage.getItem("enquired")[i].style = "cursor: not-allowed; background-color: rgb(150, 150, 150);";
+        tblEnq = localStorage.getItem("enquired");
+    }
+}
+
 function enquireProduct(specifiedElement, type) { // function called by Enquire button on any page - pass arguments 'this' and a capitalized, singular purchase type (i.e. Coin)
     specifiedElement.onclick = ""; // makes the button in question do nothing when clicked - can only send one enquiry
     specifiedElement.style = "cursor: wait; background-color: rgb(150, 150, 150);"; //changes button color to a light gray and gives a spinny wheel of death when you hover over it
@@ -14,6 +24,8 @@ function enquireProduct(specifiedElement, type) { // function called by Enquire 
     if (win == null) {specifiedElement.textContent = "Failed | Refresh"; throw Exception("Could not open a mail window!")}; // if null (could not open window) tell the user to refresh the page and throw an exception
     var timer = setInterval(() => { // execute every 500 ms (.5 s)
         if (win.closed) { // if the mail window is closed
+            tblEnq.push(specifiedElement);
+            localStorage.setItem("enquired", tblEnq);
             specifiedElement.textContent = "Enquired"; // tell the user they've made their enquiry
             specifiedElement.style = "cursor: not-allowed; background-color: rgb(150, 150, 150);"; // indicate that the user can make no further enquiries
             clearInterval(timer); // stop the timer
