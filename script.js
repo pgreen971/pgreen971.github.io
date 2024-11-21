@@ -2,6 +2,7 @@ function enquireProduct(specifiedElement, type) {
     specifiedElement.onclick = ""
     specifiedElement.style = "cursor: wait; background-color: rgb(150, 150, 150);"
     specifiedElement.textContent = "Process"
+    console.log("1")
     let modHREF = ""
     if (modHREF.indexOf("#")) {
         for (var i = 0; i < modHREF.indexOf("#"); i++) {
