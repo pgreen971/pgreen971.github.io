@@ -1,18 +1,17 @@
 function enquireProduct(specifiedElement, type) {
-    specifiedElement.onclick = ""
-    specifiedElement.style = "cursor: wait; background-color: rgb(150, 150, 150);"
-    specifiedElement.textContent = "Process"
-    console.log("1")
-    let modHREF = ""
+    specifiedElement.onclick = "";
+    specifiedElement.style = "cursor: wait; background-color: rgb(150, 150, 150);";
+    specifiedElement.textContent = "Sending";
+    let modHREF = "";
     if (modHREF.indexOf("#")) {
         for (var i = 0; i < modHREF.indexOf("#"); i++) {
-            modHREF += location.href[i]
+            modHREF += location.href[i];
         }
     } else {
-        modHREF = location.href
+        modHREF = location.href;
     }
-    let win = window.open("mailto:pgnetmail@yahoo.com?subject=Automatic " + type + " Enquiry&body=" + modHREF + "#" + specifiedElement.id)
-    const timer = setInterval(() => {
+    let win = window.open("mailto:pgnetmail@yahoo.com?subject=Automatic " + type + " Enquiry&body=" + modHREF + "#" + specifiedElement.id);
+    var timer = setInterval(() => {
         if (win.closed) {
             clearInterval(timer);
             specifiedElement.textContent = "Enquired";
