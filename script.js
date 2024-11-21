@@ -11,11 +11,9 @@ function enquireProduct(specifiedElement, type) {
         modHREF = location.href;
     }
     let win = window.open("mailto:pgnetmail@yahoo.com?subject=Automatic " + type + " Enquiry&body=" + modHREF + "#" + specifiedElement.id);
-    var timer = setInterval(() => {
-        if (win.closed) {
-            clearInterval(timer);
-            specifiedElement.textContent = "Enquired";
-            specifiedElement.style = "cursor: not-allowed; background-color: rgb(150, 150, 150);";
-        }
-    }, 500);
+    if (win == null) {specifiedElement.textContent = "Failed | Refresh"; throw Exception("Could not open a mail window!")}
+    win.onclose(function() {
+        specifiedElement.textContent = "Enquired";
+        specifiedElement.style = "cursor: not-allowed; background-color: rgb(150, 150, 150);";
+    })
 }
