@@ -5,8 +5,9 @@
 body {
     background-color: rgb(50, 50, 50);
 }
-titleCustom{
-    font-size: 18px;
+titleCustom {
+    align-items: center;
+    font-size: 30px;
     font-weight: 700;
     font-style: italic;
 }
