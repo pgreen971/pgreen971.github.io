@@ -24,10 +24,10 @@ function enquireProduct(specifiedElement, type) { // function called by Enquire 
     if (win == null) {specifiedElement.textContent = "Failed | Refresh"; throw Exception("Could not open a mail window!")}; // if null (could not open window) tell the user to refresh the page and throw an exception
     var timer = setInterval(() => { // execute every 500 ms (.5 s)
         if (win.closed) { // if the mail window is closed
-            tblEnq.push(specifiedElement);
-            localStorage.setItem("enquired", tblEnq);
             specifiedElement.textContent = "Enquired"; // tell the user they've made their enquiry
             specifiedElement.style = "cursor: not-allowed; background-color: rgb(150, 150, 150);"; // indicate that the user can make no further enquiries
+            tblEnq.push(specifiedElement);
+            localStorage.setItem("enquired", tblEnq);
             clearInterval(timer); // stop the timer
         }
     }, 500);
