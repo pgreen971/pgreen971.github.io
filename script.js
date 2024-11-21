@@ -23,6 +23,7 @@ function enquireProduct(specifiedElement, type) { // function called by Enquire 
     let win = window.open("mailto:pgnetmail@yahoo.com?subject=Automatic " + type + " Enquiry&body=" + modHREF + "#" + specifiedElement.id); // open a mail window mailing to pgnetmail@yahoo.com with subject Automatic [Purchase Type] Enquiry and body text linking to the coin on the page. sets variable to a representation of that window if opened successfully, null if not
     if (win == null) {specifiedElement.textContent = "Failed | Refresh"; throw Exception("Could not open a mail window!")}; // if null (could not open window) tell the user to refresh the page and throw an exception
     var timer = setInterval(() => { // execute every 500 ms (.5 s)
+        console.log(win.closed);
         if (win.closed) { // if the mail window is closed
             specifiedElement.textContent = "Enquired"; // tell the user they've made their enquiry
             specifiedElement.style = "cursor: not-allowed; background-color: rgb(150, 150, 150);"; // indicate that the user can make no further enquiries
