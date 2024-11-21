@@ -2,6 +2,9 @@
     color: #FFFFFF;
     font-family: 'Courier New', Courier, monospace;
 }
+button {
+    background-color: rgb(15, 15, 15);
+}
 body {
     background-color: rgb(50, 50, 50);
 }
