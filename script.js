@@ -1,7 +1,7 @@
 var tblEnq = []
 
 if (localStorage.getItem("enquired")) {
-    for (var i = 0; i <= localStorage.getItem("enquired").length; i++) {
+    for (var i = 1; i <= localStorage.getItem("enquired").length; i++) {
         let eqEl = document.getElementById(localStorage.getItem("enquired")[i]);
         eqEl.textContent = "Enquired";
         eqEl.style = "cursor: not-allowed; background-color: rgb(150, 150, 150);";
