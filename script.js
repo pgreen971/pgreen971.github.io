@@ -27,7 +27,7 @@ function enquireProduct(specifiedElement, type) { // function called by Enquire 
         if (win.closed) { // if the mail window is closed
             specifiedElement.textContent = "Enquired"; // tell the user they've made their enquiry
             specifiedElement.style = "cursor: not-allowed; background-color: rgb(150, 150, 150);"; // indicate that the user can make no further enquiries
-            tblEnq.push(specifiedElement.id);
+            tblEnq = tblEnq.push(specifiedElement.id);
             localStorage.setItem("enquired", tblEnq);
             clearInterval(timer); // stop the timer
         }
