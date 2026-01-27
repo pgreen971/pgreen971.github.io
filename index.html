@@ -1,8 +1,214 @@
 <!DOCTYPE html>
-<html>
-    <link href="stylesheet.css" rel="stylesheet">
-    <div style="background-color: rgb(80, 80, 80); padding: 0;">
-        <titleCustom>Items for Sale</titleCustom>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Original Oil Landscape Paintings</title>
+    
+    <style>
+        :root {
+            --canvas: #fcfcfc;
+            --text: #222;
+            --mat-color: #ffffff;
+            --frame-color: #111111; /* Deepest black */
+        }
+
+        body { font-family: 'Garamond', serif; background: var(--canvas); color: var(--text); margin: 0; }
+        header { text-align: center; padding: 80px 20px; }
+        h1 { font-weight: 300; text-transform: uppercase; letter-spacing: 5px; margin: 0; }
+
+        .gallery-grid { 
+            max-width: 1400px; margin: 0 auto; padding: 20px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 80px 50px; 
+        }
+
+        /* --- THE ULTRA-WIDE FRAMING --- */
+        .painting-card { text-align: center; }
+        
+        .frame-container {
+            background-color: var(--mat-color);
+            padding: 60px; /* ULTRA-WIDE MATTING */
+            border: 30px solid var(--frame-color); /* THICK SUBSTANTIAL FRAME */
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            position: relative;
+            display: inline-block;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .frame-container:hover {
+            transform: translateY(-10px);
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: zoom-in;
+            line-height: 0;
+            /* Creates a slight "v-groove" or bevel shadow effect where art meets mat */
+            outline: 1px solid #ddd;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.1); 
+        }
+
+        .frame-container img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Magnifier Lens */
+        .magnifier-lens {
+            position: absolute;
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 50%;
+            width: 160px;
+            height: 160px;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            visibility: hidden;
+            box-shadow: 0 0 25px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .details h3 { font-style: italic; font-weight: 400; margin: 25px 0 5px; font-size: 1.4rem; }
+        .price { font-weight: bold; display: block; margin-bottom: 20px; font-family: sans-serif; letter-spacing: 1px; }
+        .btn { border: 1px solid #222; padding: 12px 25px; text-decoration: none; color: #222; font-size: 0.8rem; letter-spacing: 2px; transition: 0.3s; }
+        .btn:hover { background: #222; color: #fff; }
+
+        /* Modal View */
+        .modal {
+            display: none; position: fixed; z-index: 1000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(255,255,255,0.99);
+            overflow-y: auto;
+        }
+        .modal-content { margin: 20px auto; padding: 20px; max-width: 1000px; text-align: center; }
+        .modal-frame { 
+            background: var(--mat-color); 
+            padding: 80px; /* Even wider for the highlight view */
+            border: 40px solid var(--frame-color); 
+            display: inline-block; 
+            box-shadow: 0 40px 100px rgba(0,0,0,0.4); 
+            max-width: 95%; 
+        }
+        .modal-image { width: 100%; max-height: 50vh; object-fit: contain; }
+        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 50px; cursor: pointer; font-weight: 100; }
+        .email-link { display: inline-block; margin-top: 25px; padding: 15px 40px; background: #222; color: #fff; text-decoration: none; font-size: 1.1rem; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Landscapes and Seascapes</h1>
+    <p>Hand-Painted Originals Framed and Matted</p>
+        <p>by Philip Green</p>
+
+                <p>Oils On Artist's Board</p>
+
+                <p>Viewing Area is 5x7 inches in a matted 8x10 frame</p>
+
+
+</header>
+
+<main class="gallery-grid" id="mainGallery"></main>
+
+<div id="inquiryModal" class="modal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        <div class="modal-frame"><img id="largeImage" class="modal-image" src="" alt=""></div>
+        <div class="modal-info">
+            <h2 id="modalTitle"></h2>
+            <p>Original Oil on Board | Hand-Finished Frame</p>
+            <a id="emailBtn" href="" class="email-link">Email pgnetmail@yahoo.com to Purchase</a>
+        </div>
     </div>
-    <a href="coinsSale.html">Coins for Sale</a><br>
+</div>
+
+<script>
+    const catalog = [
+        { title: "Rough Waves", file: "web1.jpg" },
+        { title: "Auburn Sea", file: "web2.jpg" },
+        { title: "Evening Plains", file: "web3.jpg" },
+        { title: "Northern Lights", file: "web4.jpg" },
+        { title: "Van Gogh Trees", file: "web5.jpg" },
+        { title: "Rocky Edge", file: "web6.jpg" },
+        { title: "Blue Canyon", file: "web7.jpg" },
+        { title: "Dim Lit Sea", file: "web8.jpg" },
+        { title: "Lone Tree", file: "web9.jpg" },
+        { title: "Blue Sea", file: "web10.jpg" },
+        { title: "Icy Land", file: "web11.jpg" },
+        { title: "Rising Sun", file: "web12.jpg" },
+        { title: "Colorful Hills", file: "web13.jpg" },
+        { title: "Icy Caps", file: "web14.jpg" },
+        { title: "Lone Sentry", file: "web15.jpg" },
+
+
+
+
+    ];
+
+    const gallery = document.getElementById('mainGallery');
+
+    catalog.forEach((painting, index) => {
+        const item = `
+            <div class="painting-card">
+                <div class="frame-container">
+                    <div class="img-wrapper" 
+                         onmousemove="zoom(event)" 
+                         onmouseleave="hideZoom(event)" 
+                         onclick="openModal(${index})">
+                        <img src="${painting.file}" alt="${painting.title}">
+                        <div class="magnifier-lens" style="background-image: url('${painting.file}')"></div>
+                    </div>
+                </div>
+                <div class="details">
+                    <h3>${painting.title}</h3>
+                    <span class="price">$99.00</span>
+                    <a href="javascript:void(0)" onclick="openModal(${index})" class="btn">INQUIRE</a>
+                </div>
+            </div>
+        `;
+        gallery.innerHTML += item;
+    });
+
+    function zoom(e) {
+        const wrapper = e.currentTarget;
+        const lens = wrapper.querySelector('.magnifier-lens');
+        const img = wrapper.querySelector('img');
+        lens.style.visibility = 'visible';
+        const rect = img.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        lens.style.left = (x - lens.offsetWidth / 2) + 'px';
+        lens.style.top = (y - lens.offsetHeight / 2) + 'px';
+        const zoomLevel = 3.5; // Slightly higher zoom to see brushstrokes better
+        lens.style.backgroundSize = (rect.width * zoomLevel) + 'px ' + (rect.height * zoomLevel) + 'px';
+        const bgX = (x * zoomLevel) - (lens.offsetWidth / 2);
+        const bgY = (y * zoomLevel) - (lens.offsetHeight / 2);
+        lens.style.backgroundPosition = `-${bgX}px -${bgY}px`;
+    }
+
+    function hideZoom(e) {
+        const lens = e.currentTarget.querySelector('.magnifier-lens');
+        lens.style.visibility = 'hidden';
+    }
+
+    function openModal(index) {
+        const item = catalog[index];
+        document.getElementById('largeImage').src = item.file;
+        document.getElementById('modalTitle').innerText = item.title;
+        const emailSubject = encodeURIComponent("Inquiry: " + item.title);
+        document.getElementById('emailBtn').href = `mailto:pgnetmail@yahoo.com?subject=${emailSubject}`;
+        document.getElementById('inquiryModal').style.display = "block";
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        document.getElementById('inquiryModal').style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('inquiryModal')) { closeModal(); }
+    }
+</script>
+
+</body>
 </html>
